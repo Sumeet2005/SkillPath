@@ -700,35 +700,6 @@ SkillPath/
 └── README.md
 ```
 
-## ✅ WEXA Requirement Coverage Checklist
-
-| Requirement / Evaluation Area | SkillPath Implementation | Status |
-|---|---|:---:|
-| **CognoDB usage** | Production graph storage using a Neo4j-compatible CognoDB database | ✅ |
-| **Graph data model** | Job, Skill, and Course nodes with typed relationships | ✅ |
-| **Career requirements** | `(:Job)-[:REQUIRES]->(:Skill)` | ✅ |
-| **Skill prerequisites** | `(:Skill)-[:PREREQUISITE_OF]->(:Skill)` | ✅ |
-| **Course mapping** | `(:Course)-[:TEACHES]->(:Skill)` | ✅ |
-| **Multi-hop traversal** | Variable-length `PREREQUISITE_OF*1..10` traversal | ✅ |
-| **Shortest-path logic** | `shortestPath()` in the learning-path query | ✅ |
-| **Relationally awkward query** | `FIND_LEARNING_PATH` combines requirements, prerequisites, shortest paths, and courses | ✅ |
-| **Parameterized Cypher** | `$targetJob`, `$currentSkills`, and `$skill` parameters | ✅ |
-| **Personalized learning path** | Missing prerequisite skills are converted into ordered roadmap milestones | ✅ |
-| **Career readiness** | Mastered skills are compared against target-role requirements | ✅ |
-| **Course recommendations** | Courses are mapped to skills through `:TEACHES` relationships | ✅ |
-| **Interactive graph visualization** | Three.js / WebGL knowledge graph with node inspection | ✅ |
-| **Working backend API** | Express REST API deployed on Render | ✅ |
-| **Working frontend** | React/Vite SPA deployed on Vercel | ✅ |
-| **Seed dataset** | 15 Jobs, 41 Skills, 28 Courses | ✅ |
-| **Error handling** | Centralized error and not-found middleware | ✅ |
-| **Database health check** | `/api/health` exposes backend/database connection state | ✅ |
-| **Security** | Environment-based credentials and parameterized database queries | ✅ |
-| **Documentation** | Architecture, data model, Cypher, setup, screenshots, and walkthrough | ✅ |
-
-> **Evaluation shortcut:** The fastest way to understand the implementation is **Live App → Career Planner → Learning Roadmap → Knowledge Graph**, followed by the `FIND_LEARNING_PATH` query and graph-model sections in this README.
-
----
-
 ## 📮 Submission Information
 
 - **Submission Candidate**: Sumeet Sonar

@@ -4,8 +4,18 @@ import { fetchJobs, fetchSkills, generatePath, checkBackendStatus } from "../ser
 export function useSkillPath() {
   const [jobs, setJobs] = useState([]);
   const [skills, setSkills] = useState([]);
-  const [targetJob, setTargetJob] = useState("");
+  const [targetJob, setTargetJobState] = useState("");
   const [currentSkills, setCurrentSkills] = useState([]);
+
+  // Type-safe setTargetJob setter preventing React Events / DOM nodes from polluting state
+  const setTargetJob = useCallback((val) => {
+    if (typeof val === "string") {
+      setTargetJobState(val);
+    } else if (val && val.target && typeof val.target.value === "string") {
+      setTargetJobState(val.target.value);
+    }
+  }, []);
+
   const [learningPath, setLearningPath] = useState([]);
   const [readinessScore, setReadinessScore] = useState(0);
   const [masteredRequiredSkills, setMasteredRequiredSkills] = useState([]);
@@ -50,7 +60,7 @@ export function useSkillPath() {
         setSkills(loadedSkills);
 
         if (loadedJobs.length > 0) {
-          setTargetJob(loadedJobs[0].title);
+          setTargetJobState(loadedJobs[0].title);
         }
       } catch (err) {
         if (isMounted) setError(err.message || "Failed initializing SkillPath engine.");
@@ -71,6 +81,7 @@ export function useSkillPath() {
 
   // Toggle skill selection
   const toggleSkill = useCallback((skillName) => {
+    if (typeof skillName !== "string") return;
     setCurrentSkills((prev) => {
       if (prev.includes(skillName)) {
         return prev.filter((s) => s !== skillName);
@@ -80,7 +91,10 @@ export function useSkillPath() {
   }, []);
 
   const selectAllSkills = useCallback((skillsToSelect) => {
-    const names = skillsToSelect.map((s) => (typeof s === "string" ? s : s.name));
+    if (!Array.isArray(skillsToSelect)) return;
+    const names = skillsToSelect
+      .map((s) => (typeof s === "string" ? s : s?.name))
+      .filter((s) => typeof s === "string");
     setCurrentSkills((prev) => Array.from(new Set([...prev, ...names])));
   }, []);
 
@@ -125,7 +139,7 @@ export function useSkillPath() {
 
   // Canonical state reset
   const resetState = useCallback(() => {
-    if (jobs.length > 0) setTargetJob(jobs[0].title);
+    if (jobs.length > 0) setTargetJobState(jobs[0].title);
     setCurrentSkills([]);
     setLearningPath([]);
     setReadinessScore(0);

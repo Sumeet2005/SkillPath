@@ -238,7 +238,7 @@ export function CareerPlanner({
                   Mastered: <strong>{currentSkills.length}</strong> / {skills.length}
                 </span>
                 {currentSkills.length > 0 && (
-                  <Button variant="ghost" size="sm" onClick={clearAllSkills}>
+                  <Button variant="ghost" size="sm" onClick={() => clearAllSkills()}>
                     Clear All
                   </Button>
                 )}

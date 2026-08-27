@@ -64,7 +64,13 @@ export async function fetchSkills() {
  * @param {Array<string>} currentSkills
  * @param {string} targetJob
  */
-export async function generatePath(currentSkills, targetJob) {
+export async function generatePath(currentSkillsInput, targetJobInput) {
+  // Defensive validation at API boundary: enforce targetJob is string & currentSkills is array of strings
+  const targetJob = typeof targetJobInput === "string" ? targetJobInput : "";
+  const currentSkills = Array.isArray(currentSkillsInput)
+    ? currentSkillsInput.filter((s) => typeof s === "string")
+    : [];
+
   const response = await fetch(`${API_BASE_URL}/path`, {
     method: "POST",
     headers: {

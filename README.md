@@ -639,37 +639,6 @@ SkillPath/
 └── README.md
 ```
 
----
-
-## ✅ WEXA Requirement Coverage Checklist
-
-| WEXA Requirement | Implementation Evidence in SkillPath | Status |
-|---|---|---|
-| **Real-World Use Case** | SkillPath graph-powered career planning & prerequisite roadmap engine. | **PASS** |
-| **Why Graph Database?** | Section: *Why a Graph Database?* comparing graph traversal vs SQL recursive CTEs. | **PASS** |
-| **Graph Model Diagram** | Section: *Graph Data Model* using Mermaid graph syntax. | **PASS** |
-| **Labeled Nodes** | `:Job`, `:Skill`, `:Course`, `:Certification` nodes in `scripts/seed.cypher`. | **PASS** |
-| **Typed Relationships** | `:REQUIRES`, `:PREREQUISITE_OF`, `:TEACHES` relationships in `scripts/seed.cypher`. | **PASS** |
-| **Properties** | `title`, `level`, `category`, `provider`, `duration_hours` defined in schema. | **PASS** |
-| **Realistic Seed Data** | 15 Jobs, 41 Skills, 28 Courses, 170+ relationship edges. | **PASS** |
-| **Seed Loading Script** | Executable script `scripts/seed-db.js` using `seed.cypher`. | **PASS** |
-| **Cypher Queries** | Externalized Cypher query files in `backend/src/queries/`. | **PASS** |
-| **Multi-Hop Traversal** | Variable-length path traversal `shortestPath((start:Skill)-[:PREREQUISITE_OF*1..10]->(target))`. | **PASS** |
-| **Relationally Awkward Query** | Single Cypher query executing shortestPath, missing skill filtering, and course mapping. | **PASS** |
-| **Parameterized Cypher** | 100% parameterized queries using `$targetJob`, `$currentSkills`, `$skill`. | **PASS** |
-| **Official Driver** | Official `neo4j-driver` (`^6.2.0`) over Bolt protocol (`bolt+s://`). | **PASS** |
-| **CognoDB Setup** | Section: *CognoDB Setup & Configuration*. | **PASS** |
-| **Environment Variables** | Secrets stored in `backend/.env` ignored by `.gitignore`. | **PASS** |
-| **Local Run Instructions** | Section: *Getting Started & Local Development*. | **PASS** |
-| **Architecture** | 3-tier architecture diagram (React Frontend → Express Backend → CognoDB). | **PASS** |
-| **Error Handling** | Centralized Express error handler `src/middleware/errorHandler.js`. | **PASS** |
-| **UI Screenshots** | 8 embedded screenshots in Section: *Product Walkthrough & Screenshots*. | **PASS** |
-| **Hosted Demo Link** | Live Vercel SPA: [https://skill-path-sumeet17.vercel.app](https://skill-path-sumeet17.vercel.app) | **PASS** |
-| **Screen Recording Link** | Google Drive Video: [https://drive.google.com/file/d/1w97sUcgtGycr5qrmHFFkK1Q7ehiUmED5/view?usp=sharing](https://drive.google.com/file/d/1w97sUcgtGycr5qrmHFFkK1Q7ehiUmED5/view?usp=sharing) | **PASS** |
-| **GitHub Repository** | GitHub Repo: [https://github.com/Sumeet2005/SkillPath](https://github.com/Sumeet2005/SkillPath) | **PASS** |
-
----
-
 ## 📮 Submission Information
 
 - **Submission Candidate**: Sumeet Sonar

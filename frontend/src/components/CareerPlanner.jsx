@@ -343,7 +343,7 @@ export function CareerPlanner({
                 <Button
                   variant="primary"
                   size="lg"
-                  onClick={handleGeneratePath}
+                  onClick={() => handleGeneratePath()}
                   disabled={isGeneratingPath || !targetJob}
                   isLoading={isGeneratingPath}
                   icon={

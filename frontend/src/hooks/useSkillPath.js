@@ -92,8 +92,13 @@ export function useSkillPath() {
   // Accepts optional override params for direct shortcut execution from Career Explorer
   const handleGeneratePath = useCallback(
     async (overrideTargetJob, overrideCurrentSkills, overrideNextTab = "roadmap") => {
-      const jobToUse = overrideTargetJob || targetJob;
-      const skillsToUse = overrideCurrentSkills !== undefined ? overrideCurrentSkills : currentSkills;
+      // Guard against React Synthetic Event objects passed as event handlers
+      const validTargetJob = typeof overrideTargetJob === "string" ? overrideTargetJob : null;
+      const validCurrentSkills = Array.isArray(overrideCurrentSkills) ? overrideCurrentSkills : undefined;
+      const validNextTab = typeof overrideNextTab === "string" ? overrideNextTab : "roadmap";
+
+      const jobToUse = validTargetJob || targetJob;
+      const skillsToUse = validCurrentSkills !== undefined ? validCurrentSkills : currentSkills;
 
       if (!jobToUse) return;
 
@@ -106,8 +111,8 @@ export function useSkillPath() {
         setReadinessScore(data.readinessScore || 0);
         setMasteredRequiredSkills(data.masteredRequiredSkills || []);
         setMissingRequiredSkills(data.missingRequiredSkills || []);
-        if (overrideNextTab) {
-          setActiveTab(overrideNextTab);
+        if (validNextTab) {
+          setActiveTab(validNextTab);
         }
       } catch (err) {
         setError(err.message || "Failed generating prerequisite learning path.");

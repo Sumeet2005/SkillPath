@@ -1,10 +1,27 @@
 const DEFAULT_PROD_BACKEND = "https://skillpath-as6n.onrender.com";
 
-const RAW_BASE =
-  import.meta.env.VITE_API_BASE_URL ||
-  (import.meta.env.PROD ? DEFAULT_PROD_BACKEND : "");
+/**
+ * Determine API Base URL reliably across local dev and production builds
+ */
+function getApiBaseUrl() {
+  // In local development (npm run dev), use relative "/api" so Vite dev proxy handles it
+  if (import.meta.env.DEV) {
+    const devUrl = import.meta.env.VITE_API_BASE_URL;
+    return (devUrl && devUrl.trim()) || "";
+  }
 
-const API_BASE_URL = `${RAW_BASE.replace(/\/$/, "")}/api`;
+  // In production builds (Vercel), check if VITE_API_BASE_URL is a valid absolute HTTP URL
+  const prodUrl = import.meta.env.VITE_API_BASE_URL;
+  if (prodUrl && typeof prodUrl === "string" && prodUrl.trim().startsWith("http")) {
+    return prodUrl.trim().replace(/\/$/, "");
+  }
+
+  // Production fallback: ALWAYS point directly to live Render backend
+  return DEFAULT_PROD_BACKEND;
+}
+
+const BASE_URL = getApiBaseUrl();
+const API_BASE_URL = BASE_URL ? `${BASE_URL.replace(/\/$/, "")}/api` : "/api";
 
 /**
  * Helper to safely parse JSON responses or throw meaningful error

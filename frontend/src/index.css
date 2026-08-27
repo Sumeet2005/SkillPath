@@ -1,0 +1,174 @@
+/* ==========================================================================
+   SkillPath — Phase 1 Design System Tokens & Global Foundation (#07070C)
+   ========================================================================== */
+
+:root {
+  /* Global Design System Core Tokens */
+  --bg: #08080D;
+  --surface-1: #0F0F16;
+  --surface-2: #15141D;
+  --surface-3: #1B1925;
+
+  --purple: #8B5CF6;
+  --violet: #A855F7;
+  --lavender: #C4B5FD;
+  --cyan: #22D3EE;
+  --green: #34D399;
+  --amber: #F59E0B;
+  --red: #F87171;
+
+  /* Typography System */
+  --font-heading: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'Fira Code', Consolas, monospace;
+
+  /* Component Aliases — Surfaces */
+  --bg-canvas: var(--bg);
+  --bg-deep: var(--surface-1);
+  --bg-surface: var(--surface-2);
+  --bg-elevated: var(--surface-3);
+  --bg-glass: rgba(15, 15, 22, 0.94);
+
+  /* Component Aliases — Brand & Accents */
+  --color-purple-500: var(--purple);  /* Primary Purple Identity */
+  --color-violet-500: var(--violet);  /* Electric Violet Accent */
+  --color-violet-300: var(--lavender);  /* Soft Violet Highlight */
+  --color-cyan-400: var(--cyan);    /* Technical Graph Cyan */
+  --color-green-400: var(--green);   /* Success / Mastered Green */
+  --color-amber-400: var(--amber);   /* Warning Amber */
+  --color-red-400: var(--red);     /* Error / Missing Red */
+
+  /* Color System — Typography */
+  --text-primary: #f8fafc;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --text-dim: #52525b;
+
+  /* Borders & Shadows */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.14);
+  --border-purple-glow: rgba(139, 92, 246, 0.35);
+  --border-cyan-glow: rgba(34, 211, 238, 0.35);
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.6);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.7);
+  --shadow-glow: 0 0 25px rgba(139, 92, 246, 0.25);
+
+  /* Spacing Scale (8, 12, 16, 20, 24, 32, 40, 48, 64, 80px) */
+  --space-1: 8px;
+  --space-2: 12px;
+  --space-3: 16px;
+  --space-4: 20px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 40px;
+  --space-8: 48px;
+  --space-9: 64px;
+  --space-10: 80px;
+
+  /* Radii Scale (6, 8, 10, 12, 16, 20, 24px) */
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-3xl: 24px;
+
+  /* Motion & Transitions (150–250ms) */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Transit Graph Semantics Tokens */
+  --graph-node-known: var(--color-cyan-400);
+  --graph-node-prereq: var(--color-violet-300);
+  --graph-node-active: var(--color-purple-500);
+  --graph-node-target: var(--color-violet-500);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--font-body);
+  color-scheme: dark;
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: var(--bg-canvas);
+  background-image: 
+    radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 20% 80%, rgba(34, 211, 238, 0.06) 0%, transparent 40%);
+  background-attachment: fixed;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.025em;
+}
+
+/* Base Form Control Reset */
+button, select, input {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  background: transparent;
+  padding: 0;
+}
+
+button:focus-visible,
+select:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--color-purple-500);
+  outline-offset: 2px;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-canvas);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

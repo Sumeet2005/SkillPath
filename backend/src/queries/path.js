@@ -1,0 +1,13 @@
+const {
+  FIND_LEARNING_PATH,
+  CHECK_JOB_EXISTS,
+  GET_JOB_REQUIREMENTS,
+  CHECK_SKILLS_EXIST,
+} = require("./learningPath");
+
+module.exports = {
+  FIND_LEARNING_PATH,
+  CHECK_JOB_EXISTS,
+  GET_JOB_REQUIREMENTS,
+  CHECK_SKILLS_EXIST,
+};

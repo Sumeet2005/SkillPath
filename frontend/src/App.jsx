@@ -63,6 +63,11 @@ export function App() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [mobileMenuOpen]);
 
+  // Scroll viewport to top (scroll position = 0) on tab or view transition
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [activeTab, showLanding]);
+
   const handleToggleMenu = () => {
     if (window.innerWidth > 1024) {
       setSidebarCollapsed((prev) => !prev);

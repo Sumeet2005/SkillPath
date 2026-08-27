@@ -4,6 +4,16 @@
 
 ---
 
+## 🌐 Live Demo
+
+- **Frontend App**: https://skill-path-orpin-seven.vercel.app  
+- **Backend API**: https://skillpath-as6n.onrender.com  
+- **Health Check**: https://skillpath-as6n.onrender.com/api/health  
+- **GitHub Repository**: https://github.com/Sumeet2005/SkillPath  
+- **Demo Video**: To be added before submission  
+
+---
+
 ## 🎯 1. Purpose & Problem Statement
 
 Navigating modern software developer career paths is complicated by non-linear skill dependencies. Relational SQL databases struggle to efficiently calculate multi-hop prerequisite chains (e.g., `Python` → `Machine Learning` → `Deep Learning` → `LLM Fundamentals` → `RAG`), requiring expensive recursive CTEs and multiple joins.
@@ -184,7 +194,7 @@ All endpoints return structured JSON responses with standard HTTP status codes (
 ### 1. Repository Setup & Dependencies
 ```bash
 # Clone the repository
-git clone https://github.com/your-org/SkillPath.git
+git clone https://github.com/Sumeet2005/SkillPath.git
 cd SkillPath
 
 # Install backend dependencies
@@ -356,10 +366,11 @@ SkillPath/
 - **Backend REST API**: Render (`backend/` workspace directory)
 - **Graph Database**: Hosted CognoDB Graph Instance (`bolt+s://`)
 
-### Live Production URLs (Placeholders for deployment)
-- **Frontend Web App**: `https://YOUR-FRONTEND-URL.vercel.app`
-- **Backend API Service**: `https://YOUR-BACKEND-URL.onrender.com`
-- **Screen Recording Walkthrough**: `https://loom.com/YOUR-VIDEO-LINK`
+### Live Production URLs
+- **Frontend Web App**: https://skill-path-orpin-seven.vercel.app  
+- **Backend API Service**: https://skillpath-as6n.onrender.com  
+- **Health Check Endpoint**: https://skillpath-as6n.onrender.com/api/health  
+- **Demo Video**: To be added before submission  
 
 ### Production Environment Variables Configuration
 
@@ -369,11 +380,11 @@ SkillPath/
 | `COGNODB_URI` | Bolt connection string to CognoDB instance | `bolt+s://db-XXXXX.bravo.databases.cognodb.com` |
 | `COGNODB_USER` | CognoDB database user | `cognodb` |
 | `COGNODB_PASSWORD` | Secure CognoDB instance password | `your_secure_password_here` |
-| `FRONTEND_URL` | Deployed Vercel frontend URL for CORS policy | `https://YOUR-FRONTEND-URL.vercel.app` |
+| `FRONTEND_URL` | Deployed Vercel frontend URL for CORS policy | `https://skill-path-orpin-seven.vercel.app` |
 | `PORT` | Service listener port (assigned by Render) | `10000` |
 
 #### Frontend (Vercel Project Configuration)
 | Variable | Value Description | Example |
 |---|---|---|
-| `VITE_API_BASE_URL` | Deployed Render backend API base URL | `https://YOUR-BACKEND-URL.onrender.com` |
+| `VITE_API_BASE_URL` | Deployed Render backend API base URL | `https://skillpath-as6n.onrender.com` |
 

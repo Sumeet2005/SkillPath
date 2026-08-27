@@ -16,6 +16,8 @@ const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174",
   "http://localhost:3000",
+  "https://skill-path-sumeet17.vercel.app",
+  "https://skill-path-orpin-seven.vercel.app",
   process.env.FRONTEND_URL,
 ].filter(Boolean);
 

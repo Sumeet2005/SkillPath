@@ -1,4 +1,9 @@
-const RAW_BASE = import.meta.env.VITE_API_BASE_URL || "";
+const DEFAULT_PROD_BACKEND = "https://skillpath-as6n.onrender.com";
+
+const RAW_BASE =
+  import.meta.env.VITE_API_BASE_URL ||
+  (import.meta.env.PROD ? DEFAULT_PROD_BACKEND : "");
+
 const API_BASE_URL = `${RAW_BASE.replace(/\/$/, "")}/api`;
 
 /**
@@ -59,6 +64,15 @@ export async function generatePath(currentSkills, targetJob) {
     throw new Error(data.message || "Failed to generate learning path.");
   }
   return data;
+}
+
+/**
+ * Fetch course recommendations by skill
+ * @param {string} skill
+ */
+export async function fetchRecommendations(skill) {
+  const response = await fetch(`${API_BASE_URL}/recommendations?skill=${encodeURIComponent(skill)}`);
+  return parseJsonResponse(response);
 }
 
 /**

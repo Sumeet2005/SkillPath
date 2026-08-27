@@ -208,6 +208,23 @@ graph TB
     DRV --> CDB
 ```
 
+### Request boundary
+
+```text
+Browser
+  │
+  │ HTTPS / REST
+  ▼
+Render API
+  │
+  │ Parameterized Cypher
+  ▼
+CognoDB / Neo4j
+```
+
+The frontend does not connect directly to the graph database. Database credentials remain server-side in the backend environment.
+
+
 ---
 
 ## 🔄 End-to-End Application Flow
@@ -251,37 +268,81 @@ sequenceDiagram
 
 ## 📸 Product Walkthrough & Screenshots
 
-### 1. Landing Page Overview
+The repository includes an eight-screen product walkthrough under [`ScreenShots/`](https://github.com/Sumeet2005/SkillPath/tree/main/ScreenShots).
+
+<details>
+<summary><b>1. Landing Page Overview</b> — Expand</summary>
+
 ![Landing Page](./ScreenShots/landing-page.png)
-*Hero section with real-time CognoDB status indicator, feature cards, and quick workspace access.*
 
-### 2. Dashboard Command Center
+**What it demonstrates:** Product positioning, CognoDB connection status, primary navigation, and entry points into the SkillPath experience.
+
+</details>
+
+<details>
+<summary><b>2. Dashboard Command Center</b> — Expand</summary>
+
 ![Dashboard](./ScreenShots/dashboard.png)
-*High-level workspace overview displaying active job telemetry, readiness gauge, and interactive graph preview.*
 
-### 3. Career Planner Workspace
+**What it demonstrates:** System overview, career readiness entry point, graph preview, and production database connection state.
+
+</details>
+
+<details>
+<summary><b>3. Career Planner Workspace</b> — Expand</summary>
+
 ![Career Planner](./ScreenShots/career-planner.png)
-*3-step target career selection, category-filtered skill catalog, and real-time readiness match percentage calculation.*
 
-### 4. Prerequisite Learning Roadmap
+**What it demonstrates:** Target-career selection and the user's mastered-skill configuration used to build the personalized path.
+
+</details>
+
+<details>
+<summary><b>4. Learning Roadmap</b> — Expand</summary>
+
 ![Learning Roadmap](./ScreenShots/learning-roadmap.png)
-*Sequenced prerequisite roadmap timeline showing origin skills, missing prerequisite steps, total hours, and course recommendations.*
 
-### 5. Flagship 3D WebGL Knowledge Graph
+**What it demonstrates:** Graph-derived prerequisite milestones, hop counts, skill gaps, estimated duration, and mapped learning courses.
+
+</details>
+
+<details>
+<summary><b>5. Flagship 3D WebGL Knowledge Graph</b> — Expand</summary>
+
 ![Knowledge Graph](./ScreenShots/knowledge-graph.png)
-*Interactive Three.js 3D WebGL network stage displaying emissive nodes, curved edges, orbit controls, search, and Node Inspector panel.*
 
-### 6. Career Explorer Directory
+**What it demonstrates:** Interactive Three.js/WebGL exploration of career, skill, prerequisite, and course relationships.
+
+</details>
+
+<details>
+<summary><b>6. Career Explorer Directory</b> — Expand</summary>
+
 ![Career Explorer](./ScreenShots/career-explorer.png)
-*Searchable directory grid of 15 target software engineering roles with level filters and required skill chips.*
 
-### 7. Skill Explorer Directory
+**What it demonstrates:** Searchable career-role directory with role metadata and required skill profiles.
+
+</details>
+
+<details>
+<summary><b>7. Skill Explorer Directory</b> — Expand</summary>
+
 ![Skill Explorer](./ScreenShots/skill-explorer.png)
-*Searchable directory grid of 41 technical skills across 7 category classifications with mastered state toggles.*
 
-### 8. Course Library Directory
+**What it demonstrates:** Searchable skill catalogue, category filtering, and mastered/unmastered state management.
+
+</details>
+
+<details>
+<summary><b>8. Course Library Directory</b> — Expand</summary>
+
 ![Course Library](./ScreenShots/course-library.png)
-*Curated course directory displaying 28 educational courses derived from graph teaching relationships.*
+
+**What it demonstrates:** Course resources mapped to technical skills through graph relationships.
+
+</details>
+
+> **Repository note:** Keep the image filenames in `ScreenShots/` synchronized with the paths above if the screenshots are renamed.
 
 ---
 
@@ -639,6 +700,35 @@ SkillPath/
 └── README.md
 ```
 
+## ✅ WEXA Requirement Coverage Checklist
+
+| Requirement / Evaluation Area | SkillPath Implementation | Status |
+|---|---|:---:|
+| **CognoDB usage** | Production graph storage using a Neo4j-compatible CognoDB database | ✅ |
+| **Graph data model** | Job, Skill, and Course nodes with typed relationships | ✅ |
+| **Career requirements** | `(:Job)-[:REQUIRES]->(:Skill)` | ✅ |
+| **Skill prerequisites** | `(:Skill)-[:PREREQUISITE_OF]->(:Skill)` | ✅ |
+| **Course mapping** | `(:Course)-[:TEACHES]->(:Skill)` | ✅ |
+| **Multi-hop traversal** | Variable-length `PREREQUISITE_OF*1..10` traversal | ✅ |
+| **Shortest-path logic** | `shortestPath()` in the learning-path query | ✅ |
+| **Relationally awkward query** | `FIND_LEARNING_PATH` combines requirements, prerequisites, shortest paths, and courses | ✅ |
+| **Parameterized Cypher** | `$targetJob`, `$currentSkills`, and `$skill` parameters | ✅ |
+| **Personalized learning path** | Missing prerequisite skills are converted into ordered roadmap milestones | ✅ |
+| **Career readiness** | Mastered skills are compared against target-role requirements | ✅ |
+| **Course recommendations** | Courses are mapped to skills through `:TEACHES` relationships | ✅ |
+| **Interactive graph visualization** | Three.js / WebGL knowledge graph with node inspection | ✅ |
+| **Working backend API** | Express REST API deployed on Render | ✅ |
+| **Working frontend** | React/Vite SPA deployed on Vercel | ✅ |
+| **Seed dataset** | 15 Jobs, 41 Skills, 28 Courses | ✅ |
+| **Error handling** | Centralized error and not-found middleware | ✅ |
+| **Database health check** | `/api/health` exposes backend/database connection state | ✅ |
+| **Security** | Environment-based credentials and parameterized database queries | ✅ |
+| **Documentation** | Architecture, data model, Cypher, setup, screenshots, and walkthrough | ✅ |
+
+> **Evaluation shortcut:** The fastest way to understand the implementation is **Live App → Career Planner → Learning Roadmap → Knowledge Graph**, followed by the `FIND_LEARNING_PATH` query and graph-model sections in this README.
+
+---
+
 ## 📮 Submission Information
 
 - **Submission Candidate**: Sumeet Sonar
@@ -648,6 +738,38 @@ SkillPath/
 - **GitHub Repository**: [https://github.com/Sumeet2005/SkillPath](https://github.com/Sumeet2005/SkillPath)
 
 ---
+
+## 🔎 Final Verification
+
+Before submission, verify these production links:
+
+- [🚀 Live frontend](https://skill-path-sumeet17.vercel.app)
+- [🩺 Backend health endpoint](https://skillpath-as6n.onrender.com/api/health)
+- [💻 GitHub repository](https://github.com/Sumeet2005/SkillPath)
+- [🎥 Demo video](https://drive.google.com/file/d/1w97sUcgtGycr5qrmHFFkK1Q7ehiUmED5/view?usp=sharing)
+
+Expected health response:
+
+```json
+{
+  "status": "ok",
+  "success": true,
+  "message": "SkillPath backend is running",
+  "database": "connected"
+}
+```
+
+Recommended local checks:
+
+```bash
+cd frontend
+npm run lint
+npm run build
+
+cd ../backend
+node test-engine.js
+node audit-graph.js
+```
 
 ## 📜 License
 
